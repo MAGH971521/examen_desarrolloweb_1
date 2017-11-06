@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Biblioteca - Accion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  	<link type="text/css" rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
+  </head>
+  <body>
+    <form class="form" action="" method="post">
+      {% csrf_token %}
+      {{form.as_p}}
+      <button type="submit" class="btn btn-primary" value="{{btn_title}}"></button>
+    </form>
+  </body>
+</html>
