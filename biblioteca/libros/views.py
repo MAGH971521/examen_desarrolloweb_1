@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import (CreateView, UpdateView, DeleteView, ListView, DetailView)
 from .mixin import FormUserNeededMixin
+from .forms import LibrosModelForms
 
 # Create your views here.
 
@@ -25,21 +26,42 @@ def detalle_libros(request, id=10):
 # Examen 2
 
 
+class LibroListView(ListView):
+    template_name='libro/lista.html'
+
+    def get_queryset(self, *args, **kargs):
+        qs = Libros.object.all()
+        print self.request.GET
+        query = self.request.GET.get('q', None)
+        if query is not None:
+            qs = qs.filter(
+                Q(content__icontains=query) | Q(user__username__icontains=query)
+            )
+        return qs
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(LibroListView, self).get_context_data(*args, **kwargs)
+        print context
+        context['create_form'] = LibrosModelForms()
+        context['create_url'] = reverse_lazy("libros_create")
+        return context
+
+
 class LibroCreateView(LoginRequiredMixin, FormUserNeededMixin, CreateView):
-    form_class = LibrosModelForm
+    form_class = LibrosModelForms
     template_name = "libro/create.html"
-    success_url = "/libros/create"
+    success_url = "/libros/lista"
     login_url = "/admin"
 
 
-class LibroUpdateView(LoginRequiredMixin, UpdateView):
+class LibroUpdateView(UpdateView):
     queryset = Libros.objects.all()
-    form_class = LibrosModelForm
+    form_class = LibrosModelForms
     template_name = "libro/mod.html"
-    success_url = "/libros/update"
+    success_url = "/libros/lista"
 
 
 class LibroDeleteView(LoginRequiredMixin,  DeleteView):
     model = Libros
     template_name = "libros/delete.html"
-    success_url = "/libros/delete"
+    success_url = reverse_lazy("lista")

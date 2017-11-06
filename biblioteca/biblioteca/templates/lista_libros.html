@@ -31,7 +31,14 @@
 
     <div class="album text-muted">
     <div class="container">
-    {% for i in result%}
+    {% block search %}
+      {% include "libro/search_form.html" %}<br/>
+    {% endblock %}
+    {% if not request.GET.q %}
+      <div class="container">
+        {% include "libro/form.html" with form=create_form action_url=create_url btn_title='Libro Nuevo' %}
+      </div>
+    {% for i in result %}
     <div class="row">
     <span class="card" style="width: 20rem;">
     <img data-src="#" alt="{{i.Nombre}}">
