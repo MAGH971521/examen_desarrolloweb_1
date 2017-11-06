@@ -1,36 +1,5 @@
-{% load static %}
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Libros disponibles - Biblioteca</title>
-    <meta charset="utf-8">
-  	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  	<link type="text/css" rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-    <link type="text/css" rel="stylesheet" href="{% static 'mycss/Sub1.css' %}">
-  	<script src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
-  </head>
-  <body>
-    <div  class="cover-container">
-      <div class="masthead clearfix">
-        <div class="inner" style="background-color: #333;">
-          <h3 class="masthead-brand">Biblioteca</h3>
-          <nav class="nav nav-masthead">
-            <a class="nav-link" href="/home/">Pagina Principal</a>
-            <a class="nav-link active" href="#">Lista de Libros</a>
-          </nav>
-        </div>
-      </div>
-    </div>
-    <section class="jumbotron text-center" style="background-color: #333">
-      <div class="container">
-        <h1 class="jumbotron-heading">Libros</h1>
-        <p class="lead text-muted">Lista de Libros disponibles en la base de datos</p>
-      </div>
-    </section>
-
-    <div class="album text-muted">
-    <div class="container">
+{% extends "base.html"%}
+{%block content%}
     {% include "libro/search_form.html" %}
     <button class="btn btn-secondary" style="padding: 10px; margin: 10px;"><a class="nav-link1" style='color: black;' href="/libros/create">Registrar Libro nuevo</a></button>
     <br/>
@@ -48,14 +17,4 @@
     </div>
     </span>
     {% endfor %}
-    </div>
-    </div>
-    </div>
-
-    <footer class = "text-muted">
-     <div class="container">
-      <p>Ejemplo de album personalizado</p>
-     </div>
-    </footer>
-  </body>
-</html>
+{%endblock%}
