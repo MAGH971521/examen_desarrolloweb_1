@@ -31,26 +31,24 @@
 
     <div class="album text-muted">
     <div class="container">
-    {% block search %}
-      {% include "libro/search_form.html" %}<br/>
-    {% endblock %}
-    {% if not request.GET.q %}
-      <div class="container">
-        {% include "libro/form.html" with form=create_form action_url=create_url btn_title='Libro Nuevo' %}
-      </div>
-    {% for i in result %}
+    {% include "libro/search_form.html" %}
+    <button class="btn btn-secondary" style="padding: 10px; margin: 10px;"><a class="nav-link1" style='color: black;' href="/libros/create">Registrar Libro nuevo</a></button>
+    <br/>
     <div class="row">
+    {% for object in object_list %}
     <span class="card" style="width: 20rem;">
-    <img data-src="#" alt="{{i.Nombre}}">
+    <img data-src="#" alt="{{object.Nombre}}">
     <div class="card-body">
-    <h4 class="card-title">Autor: {{i.Autor}}</h4>
-    <h6 class="card-subtitle mb-2 text-muted">Editorial: {{i.Editorial}}</h6>
-    <p class="card-text">Precio: ${{i.Precio}} MXN</p>
-    <a class="nav-link1" href="/libros/detalle/{{i.id}}" style="color: black">Detalles del libro</a>
+    <h4 class="card-title">Autor: {{object.Autor}}</h4>
+    <h6 class="card-subtitle mb-2 text-muted">Editorial: {{object.Editorial}}</h6>
+    <p class="card-text">Precio: ${{object.Precio}} MXN</p>
+    <p><a class="nav-link1" href="/libros/detalle/{{object.id}}" style="color: black">Detalles del libro</a></p>
+    <p><a class="nav-link1" href="/libros/detalle/{{object.id}}/delete" style="color: black">Eliminar libro</a></p>
+    <p><a class="nav-link1" href="/libros/detalle/{{object.id}}/edit" style="color: black">Modificar libro</a></p>
     </div>
     </span>
-    </div>
     {% endfor %}
+    </div>
     </div>
     </div>
 

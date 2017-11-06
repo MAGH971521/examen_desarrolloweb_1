@@ -1,13 +1,5 @@
 {% load static %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <form class="form" action='{% url "tweet_list" %}' method="GET">
-      <input class="btn btn-secondary" type="text" name="q" placeholder = 'Buscar' value = '{{ request.GET.q }}'>
-    </form>
-  </body>
-</html>
+<form class="form" action='{% url "lista" %}' method="GET">
+      <input class="form-control" type="text" name="q" placeholder = 'Ejemplo: "Algo mas"' value = '{{ request.GET.q }}'>
+      <input class="btn btn-secondary" style="margin: 10px;" type="submit" value="Buscar">
+</form>

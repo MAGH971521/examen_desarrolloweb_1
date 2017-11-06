@@ -9,6 +9,7 @@ from django.urls import reverse_lazy
 from django.views.generic import (CreateView, UpdateView, DeleteView, ListView, DetailView)
 from .mixin import FormUserNeededMixin
 from .forms import LibrosModelForms
+from django.db.models import Q
 
 # Create your views here.
 
@@ -27,15 +28,15 @@ def detalle_libros(request, id=10):
 
 
 class LibroListView(ListView):
-    template_name='libro/lista.html'
+    template_name = 'lista_libros.html'
 
     def get_queryset(self, *args, **kargs):
-        qs = Libros.object.all()
+        qs = Libros.objects.all()
         print self.request.GET
         query = self.request.GET.get('q', None)
         if query is not None:
             qs = qs.filter(
-                Q(content__icontains=query) | Q(user__username__icontains=query)
+                Q(Nombre__icontains=query) | Q(Autor__icontains=query)
             )
         return qs
 
@@ -63,5 +64,5 @@ class LibroUpdateView(UpdateView):
 
 class LibroDeleteView(LoginRequiredMixin,  DeleteView):
     model = Libros
-    template_name = "libros/delete.html"
+    template_name = "libro/delete.html"
     success_url = reverse_lazy("lista")
