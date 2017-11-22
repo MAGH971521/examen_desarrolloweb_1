@@ -19,8 +19,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from .views import home
-from libros.views import lista_libros, detalle_libros
-from libros.views import LibroCreateView, LibroDeleteView, LibroUpdateView, LibroListView
+from libros.views import detalle_libros
+from libros.views import (
+    LibroCreateView, LibroDeleteView, LibroUpdateView, LibroListView)
 
 
 urlpatterns = [
@@ -31,8 +32,12 @@ urlpatterns = [
     url(r'^libros/detalle/(?P<id>\d)/$', detalle_libros, name='detalles'),
     url(r'^libros/detalle/(?P<id>\d\d)/$', detalle_libros, name='detalles'),
     url(r'^libros/create$', LibroCreateView.as_view(), name='libros_create'),
-    url(r'^libros/detalle/(?P<pk>\d)/edit', LibroUpdateView.as_view(), name='libros_mod'),
-    url(r'^libros/detalle/(?P<pk>\d)/delete', LibroDeleteView.as_view(), name='libros_del'),
-    url(r'^libros/detalle/(?P<pk>\d\d)/edit', LibroUpdateView.as_view(), name='libros_mod'),
-    url(r'^libros/detalle/(?P<pk>\d\d)/delete', LibroDeleteView.as_view(), name='libros_del'),
+    url(r'^libros/detalle/(?P<pk>\d)/edit',
+        LibroUpdateView.as_view(), name='libros_mod'),
+    url(r'^libros/detalle/(?P<pk>\d)/delete',
+        LibroDeleteView.as_view(), name='libros_del'),
+    url(r'^libros/detalle/(?P<pk>\d\d)/edit',
+        LibroUpdateView.as_view(), name='libros_mod'),
+    url(r'^libros/detalle/(?P<pk>\d\d)/delete',
+        LibroDeleteView.as_view(), name='libros_del'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

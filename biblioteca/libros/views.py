@@ -6,7 +6,8 @@ from .models import Libros
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic import (CreateView, UpdateView, DeleteView, ListView, DetailView)
+from django.views.generic import (
+    CreateView, UpdateView, DeleteView, ListView, DetailView)
 from .mixin import FormUserNeededMixin
 from .forms import LibrosModelForms
 from django.db.models import Q
