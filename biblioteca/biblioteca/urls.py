@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
@@ -22,6 +22,7 @@ from .views import home
 from libros.views import detalle_libros
 from libros.views import (
     LibroCreateView, LibroDeleteView, LibroUpdateView, LibroListView)
+from accounts.views import UserRegisterView
 
 
 urlpatterns = [
@@ -40,4 +41,8 @@ urlpatterns = [
         LibroUpdateView.as_view(), name='libros_mod'),
     url(r'^libros/detalle/(?P<pk>\d\d)/delete',
         LibroDeleteView.as_view(), name='libros_del'),
+    url(r'^api/libros/', include('libros.api.urls', namespace='libros-api')),
+    url(r'^accounts/register/$',
+        UserRegisterView.as_view(), name='register'),
+    url(r'^', include('django.contrib.auth.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
