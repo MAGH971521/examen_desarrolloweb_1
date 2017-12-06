@@ -18,7 +18,7 @@ from django.db.models import Q
 def lista_libros(request):
     result_set = Libros.objects.all()
     context = {"result": result_set}
-    return render(request, "lista_libros.html", context)
+    return render(request, "lista_libros_ajax.html", context)
 
 
 def detalle_libros(request, id=10):
@@ -29,10 +29,10 @@ def detalle_libros(request, id=10):
 
 
 class LibroListView(ListView):
-    template_name = 'lista_libros.html'
+    template_name = 'lista_libros_ajax.html'
 
     def get_queryset(self, *args, **kargs):
-        qs = Libros.objects.all()
+        qs = Libros.objects.all().order_by("-pk")
         print self.request.GET
         query = self.request.GET.get('q', None)
         if query is not None:
