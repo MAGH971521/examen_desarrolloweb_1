@@ -7,8 +7,7 @@ User = get_user_model()
 
 
 class UserDisplaySerializer(serializers.ModelSerializer):
-    follower_count = serializers.SerializerMethodField()
-
+    
     class Meta:
         model = User
         fields = [

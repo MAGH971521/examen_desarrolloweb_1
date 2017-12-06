@@ -10,11 +10,11 @@ from .validators import validate_content
 
 class Libros(models.Model):
 
-    Nombre = models.CharField(max_length=140, validators=[validate_content])
-    Autor = models.CharField(max_length=200, validators=[validate_content])
-    Editorial = models.CharField(max_length=400, validators=[validate_content])
-    ISBN = models.CharField(max_length=250, validators=[validate_content])
-    Precio = models.FloatField(validators=[validate_content])
+    Nombre = models.CharField(max_length=140)
+    Autor = models.CharField(max_length=200)
+    Editorial = models.CharField(max_length=400)
+    ISBN = models.CharField(max_length=250)
+    Precio = models.FloatField()
     Creacion = models.DateTimeField(auto_now=True)
 
     def __str__(self):

@@ -42,7 +42,8 @@ urlpatterns = [
     url(r'^libros/detalle/(?P<pk>\d\d)/delete',
         LibroDeleteView.as_view(), name='libros_del'),
     url(r'^api/libros/', include('libros.api.urls', namespace='libros-api')),
-    url(r'^accounts/register/$',
+    url(r'^accounts/register$',
         UserRegisterView.as_view(), name='register'),
+    url(r'^accounts/profile/$', LibroListView.as_view(), name='lista-login'),
     url(r'^', include('django.contrib.auth.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
