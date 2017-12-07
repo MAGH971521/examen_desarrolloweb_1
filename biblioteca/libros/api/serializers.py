@@ -20,6 +20,7 @@ class LibroModelSerializer(serializers.ModelSerializer):
             'Creacion',
             'date_display',
             'timesince',
+            'id'
         ]
 
     def get_date_display(self, obj):

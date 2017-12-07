@@ -19,7 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from .views import home
-from libros.views import detalle_libros
+from libros.views import detalle_libros, lista_libros
 from libros.views import (
     LibroCreateView, LibroDeleteView, LibroUpdateView, LibroListView)
 from accounts.views import UserRegisterView

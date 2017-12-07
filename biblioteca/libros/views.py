@@ -29,6 +29,7 @@ def detalle_libros(request, id=10):
 
 
 class LibroListView(ListView):
+    #template_name = 'lista_libros.html'
     template_name = 'lista_libros_ajax.html'
 
     def get_queryset(self, *args, **kargs):

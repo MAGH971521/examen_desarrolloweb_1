@@ -20,7 +20,7 @@ class LibrosListAPIView(generics.ListAPIView):
     pagination_class = StandarResultPagination
 
     def get_queryset(self, *args, **kwargs):
-        qs = Libros.objects.all()
+        qs = Libros.objects.all().order_by("-Creacion")
         query = self.request.GET.get("q", None)
         if query is not None:
             qs = qs.filter(

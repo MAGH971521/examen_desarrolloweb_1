@@ -1,25 +1,7 @@
 {% extends "base.html"%}
-{%block content%}
-    {% include "libro/search_form.html" %}
-    {% if not request.GET.q %}
-      {% include "libro/form.html" with form=create_form action_url=create_url btn_title="Registrar" form_id="libros-form"%}
-    {% endif%}
-    <article class="row" id="ajax_libros">
-
-    </article>
-    <button  class="btn btn-secondary" style="padding: 10px; margin: 10px;" id="loadmore">Cargar mas Libros</button>
-    {% for object in object_list %}
-      {%empty%}
-        {%if request.GET.q%}
-        <p>Libros no Encontrados</p>
-        <button class="btn btn-secondary" style="padding: 10px; margin: 10px;"><a class="nav-link1" style='color: black;' href="/libros/lista">Regresar</a></button>
-        {%else%}
-        <p>Libros no Creados... aun ;D</p>
-      {%endif%}
-    {% endfor %}
-{%endblock%}
 {%block script%}
 <script>
+
 function getParameterByName(name, url) {
   if (!url) url = window.location.href;
   name = name.replace(/[\[\]]/g, "\\$&");
@@ -29,6 +11,8 @@ function getParameterByName(name, url) {
   if (!results[2]) return '';
   return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
+
+
 $(document).ready(function(){
   // console.log("working");
   var query = getParameterByName('q');
@@ -36,9 +20,10 @@ $(document).ready(function(){
   //var nextTweetUrl;
   var nextLibroUrl;
   var cont = 0;
+
+
   function attachLibro(libroValue, prepend) {
     var libroDateDisplay = libroValue.timesince;
-    var librouser = libroValue.user.username;
     var libroAutor = libroValue.Autor;
     var libroNombre = libroValue.Nombre;
     var libroEditorial = libroValue.Editorial;
@@ -53,7 +38,7 @@ $(document).ready(function(){
         "<h6 class='card-subtitle mb-2 text-muted'>Editorial: " + libroEditorial +"</h6>"+
         "<p class='card-text'>Precio: $" + libroPrecio +" MXN</p>"+
         "<p><a class='nav-link1' href='/libros/detalle/" + libroid +"' style='color: black'>Detalles del libro</a></p>"+
-        "<p> Creado por: " + librouser + "&nbsp; |" + libroDateDisplay +"</p>"+
+        "<p>&nbsp; |" + libroDateDisplay +"</p>"+
         "</div>"+
         "</span>")
     }
@@ -66,7 +51,6 @@ $(document).ready(function(){
         "<h6 class='card-subtitle mb-2 text-muted'>Editorial: " + libroEditorial +"</h6>"+
         "<p class='card-text'>Precio: $" + libroPrecio +" MXN</p>"+
         "<p>"+ libroDateDisplay +"</p>"+
-        "<p> Creado por: " + librouser + "&nbsp; |" + libroDateDisplay +"</p>"+
         "<p><a class='nav-link1' href='/libros/detalle/" + libroid +"' style='color: black'>Detalles del libro</a></p>"+
         "<p><a class='nav-link1' href='/libros/detalle/" + libroid +"/delete' style='color: black'>Eliminar libro</a></p>"+
         "<p><a class='nav-link1' href='/libros/detalle/" + libroid +"/edit' style='color: black'>Modificar libro</a></p>"+
@@ -77,17 +61,19 @@ $(document).ready(function(){
   }
   function fecthLibros(url) {
     console.log("fetching...");
-    var fecthUrl;
+    var fetchUrl;
     if (!url){
-      fetchUrl='/api/libros/?q=somequery';
+      fetchUrl='/api/libros/';
+      console.log(fetchUrl);
     }
     else{
-      fetchUrl=url
+      fetchUrl=url;
+      console.log(fetchUrl);
     }
     $.ajax({
-      url: fecthUrl,
+      url: fetchUrl,
       data:{
-        'q': query
+        "q": query
       },
       method: "GET",
       success: function(data){
@@ -105,6 +91,7 @@ $(document).ready(function(){
     });
   }
   fecthLibros();
+
   $("#loadmore").click(function(event) {
     event.preventDefault();
     console.log("Click me!");
@@ -112,7 +99,7 @@ $(document).ready(function(){
       fecthLibros(nextLibroUrl);
     }
   })
-  $("#libro-form").submit(function(event) {
+  $("#libros-form").submit(function(event) {
       event.preventDefault();
       var _this = $(this);
       console.log(event);
@@ -137,4 +124,15 @@ $(document).ready(function(){
   })
 });
 </script>
+{%endblock%}
+{%block content%}
+    {% include "libro/search_form.html" %}
+    {% if not request.GET.q %}
+      {% include "libro/form.html" with form=create_form action_url=create_ajax btn_title="Registrar" form_id="libros-form"%}
+    {% endif%}
+    <article class="row" id="ajax_libros">
+
+    </article>
+    <button  class="btn btn-secondary" style="padding: 10px; margin: 10px;" id="loadmore">Cargar mas Libros</button>
+
 {%endblock%}
