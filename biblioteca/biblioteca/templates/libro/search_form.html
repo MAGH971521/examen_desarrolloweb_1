@@ -1,4 +1,4 @@
-{% load static %}
+
 <form class="form" action='{% url "lista" %}' method="GET">
       <input class="form-control" type="text" name="q" placeholder = 'Ejemplo: "Algo mas"' value = '{{ request.GET.q }}'>
       <input class="btn btn-secondary" style="margin: 10px;" type="submit" value="Buscar">

@@ -1,5 +1,5 @@
-{% extends "base.html" %}
-
+{% extends "Accounts/base.html" %}
+{% block Titulo %}Inicio de Sesion{% endblock %}
 {% block content %}
 
 {% if form.errors %}
@@ -14,24 +14,25 @@
     <p>Please login to see this page.</p>
     {% endif %}
 {% endif %}
+<div class="container">
 
-<form method="post" action="{% url 'login' %}">
-{% csrf_token %}
-<table>
-<tr>
-    <td>{{ form.username.label_tag }}</td>
-    <td>{{ form.username }}</td>
-</tr>
-<tr>
-    <td>{{ form.password.label_tag }}</td>
-    <td>{{ form.password }}</td>
-</tr>
-</table>
-
-<input type="submit" value="login" />
-<input type="hidden" name="next" value="{{ next }}" />
-</form>
-
+  <form class="form-signin" method="post" action="{% url 'login' %}">
+    <h2 class="form-signin-heading">Iniciar sesion</h2>
+    {% csrf_token %}
+    <table>
+    <tr>
+        <td class="sr-only">{{ form.username.label_tag }}</td>
+        <td class="form-control">{{ form.username }}</td>
+    </tr>
+    <tr>
+        <td class="sr-only">{{ form.password.label_tag }}</td>
+        <td class="form-control">{{ form.password }}</td>
+    </tr>
+    </table>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" value="login">Acceder</button>
+    <input type="hidden" name="next" value="{{ next }}" />
+  </form>
+</div>
 {# Assumes you setup the password_reset view in your URLconf #}
 <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
 

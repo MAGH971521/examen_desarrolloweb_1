@@ -1,8 +1,8 @@
-{% extends "base1.html"%}
+{% extends "libro/base.html"%}
 {%block content%}
     <form class="form" action = "" method = "post">
       {% csrf_token %}
-      <p>Estas seguro que quieres eliminar el libro:  "{{object}}" ?</p>
-      <button type="submit" class="btn btn-secondary" value="Confirmar">Confirmar</button>
+      <p>Estas seguro que quieres eliminar el libro:  "{{object.Nombre}}" ?</p>
+      <button type="submit" class="btn btn-primary" value="Confirmar">Confirmar</button>
     </form>
 {%endblock%}

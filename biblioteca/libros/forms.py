@@ -15,13 +15,9 @@ class LibrosModelForms(forms.ModelForm):
         attrs={
             'placeholder': 'Editorial: ',
             'class': 'form-control'}))
-    ISBN = forms.CharField(label='', widget=forms.TextInput(
+    Sinopsis = forms.CharField(label='', widget=forms.Textarea(
         attrs={
-            'placeholder': 'ISBN del Libro',
-            'class': 'form-control'}))
-    Precio = forms.FloatField(label='', widget=forms.NumberInput(
-        attrs={
-            'placeholder': 'Precio',
+            'placeholder': 'Sinopsis',
             'class': 'form-control'}))
 
     class Meta:
@@ -30,6 +26,5 @@ class LibrosModelForms(forms.ModelForm):
             "Nombre",
             "Autor",
             "Editorial",
-            "ISBN",
-            "Precio",
+            "Sinopsis",
         ]

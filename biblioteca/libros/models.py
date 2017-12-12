@@ -13,9 +13,8 @@ class Libros(models.Model):
     Nombre = models.CharField(max_length=140)
     Autor = models.CharField(max_length=200)
     Editorial = models.CharField(max_length=400)
-    ISBN = models.CharField(max_length=250)
-    Precio = models.FloatField()
+    Sinopsis = models.TextField(null=True)
     Creacion = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.Nombre

@@ -1,0 +1,9 @@
+{%  extends "libro/base.html" %}
+{%block content%}
+<div class="starter-template">
+  <h1>Titulo: {{result.Nombre}}</h1>
+  <p class="lead">Por: {{result.Autor}}<br>
+    <h2>Sinopsis</h2><br>{{result.Sinopsis}}<br><br><em>Editorial: {{result.Editorial}}</em>
+  </p>
+</div>
+{%endblock%}

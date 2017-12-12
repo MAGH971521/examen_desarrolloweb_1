@@ -1,6 +1,7 @@
-
-    <form {%if form_id%} id="{{form_id}}" {%endif%} class="form" action="{%if action_url%} {{action_url}}{% endif %}" method="POST">
+<form class="form"  method="POST" action="{% if action_url %}{{ action_url }}{% endif %}" >
       {% csrf_token %}
-      {{form.as_p}}
-      <button type="submit" class="btn btn-primary" value="{{btn_title}}">{{btn_title}}</button>
-    </form>
+      <div class="container">
+        {{form.as_p}}
+        <input class="btn btn-primary" type="submit" name="" value="{{btn_title}}">
+      </div>
+</form>

@@ -18,8 +18,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 
-from .views import home
-from libros.views import detalle_libros, lista_libros
+from libros.views import detalle_libros, home, detalle_libros_global, lista_libros
 from libros.views import (
     LibroCreateView, LibroDeleteView, LibroUpdateView, LibroListView)
 from accounts.views import UserRegisterView
@@ -29,17 +28,14 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', home, name='home'),
     url(r'^home/$', home, name='home'),
-    url(r'^libros/lista$', LibroListView.as_view(), name='lista'),
-    url(r'^libros/detalle/(?P<id>\d)/$', detalle_libros, name='detalles'),
-    url(r'^libros/detalle/(?P<id>\d\d)/$', detalle_libros, name='detalles'),
-    url(r'^libros/create$', LibroCreateView.as_view(), name='libros_create'),
-    url(r'^libros/detalle/(?P<pk>\d)/edit',
+    url(r'^libros/lista$', lista_libros, name='lista'),
+    url(r'^libros/detalle/(?P<id>\d)/$', detalle_libros_global, name='detalles'),
+    url(r'^libros/detalle/(?P<id>\d+)/$', detalle_libros_global, name='detalles'),
+    url(r'^accounts/profile/libros/create$', LibroCreateView.as_view(), name='libros_create'),
+    url(r'^accounts/profile/libros/detalle/(?P<pk>\d+)/edit',
         LibroUpdateView.as_view(), name='libros_mod'),
-    url(r'^libros/detalle/(?P<pk>\d)/delete',
-        LibroDeleteView.as_view(), name='libros_del'),
-    url(r'^libros/detalle/(?P<pk>\d\d)/edit',
-        LibroUpdateView.as_view(), name='libros_mod'),
-    url(r'^libros/detalle/(?P<pk>\d\d)/delete',
+    url(r'^accounts/profile/libros/detalle/(?P<id>\d+)/', detalle_libros, name='libro_detalle'),
+    url(r'^accounts/profile/libros/detalle/(?P<pk>\d+)/delete',
         LibroDeleteView.as_view(), name='libros_del'),
     url(r'^api/libros/', include('libros.api.urls', namespace='libros-api')),
     url(r'^accounts/register$',

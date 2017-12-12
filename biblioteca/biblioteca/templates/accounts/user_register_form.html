@@ -1,19 +1,10 @@
-{% extends "base.html" %}
-{% block content %}
-
-<form {%if form_id%} id='{{form_id}}' {%endif%} class="form"  method="POST" action="{% if action_url %}{{ action_url }}{% endif %}" >
-
-      {% csrf_token %}
-      <!-- <label for="id_content">Content:</label></br> -->
-
-      <div class="control">
-        <h2>Registro de usuarios Biblioteca :D!</h2>
-        <!-- Que es un widget y como lo uso? Tarea -->
-          <!-- <textarea class="textarea"  name="content" required="" id="id_content" maxlength="140" placeholder="Tweet Please"></textarea> -->
-          {{form.as_p}}
-          <input class="btn btn-primary" type="submit" name="" value="Registrar">
-      </div>
-      <!-- {{form.as_p}} -->
+{% extends "Accounts/base.html"%}
+{% block Titulo %}Registro de Cuenta{%endblock%}
+{% block content%}
+<form {%if form_id%} id='{{form_id}}' {%endif%} method="POST" action="{% if action_url %}{{ action_url }}{% endif %}" class="form-signin">
+  {% csrf_token %}
+  <h2 class="form-signin-heading">Registro de Usuario</h2>
+  {{form.as_p}}
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Registrarse</button>
 </form>
-
-{% endblock %}
+{%endblock%}

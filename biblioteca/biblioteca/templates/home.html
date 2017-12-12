@@ -1,44 +1,101 @@
 {% load static %}
-
 <!DOCTYPE html>
-<html>
-<head>
-	<title>Inicio - Biblioteca</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link type="text/css" rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-	<link type="text/css" rel="stylesheet" href="{% static 'mycss/Cover.css' %}">
-	<script src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
-</head>
-<body>
-	<div class="site-wrapper">
-		<div class="site-wrapper-inner">
-			<div  class="cover-container">
-				<div class="masthead clearfix">
-					<div class="inner">
-						<h3 class="masthead-brand">Biblioteca</h3>
-						<nav class="nav nav-masthead">
-							<a class="nav-link active" href="">Pagina Principal</a>
-							<a class="nav-link" href="/libros/lista">Lista de Libros</a>
-							<a class="nav-link" href="/admin">Administrador</a>
-							<a class="nav-link" href="/accounts/register">Registrarse</a>
-							<a class="nav-link" href="/login">Iniciar sesion</a>
-						</nav>
-					</div>
-				</div>
-			</div>
-			<div class="inner cover">
-				<h1 class="cover-heading">Biblioteca</h1>
-				<p class="lead" style="color: #fff; font-style: bold;">Biblioteca compacta, solo disponemos de 10 :D!</p>
-				<p class="lead">
-					<a href="/api/libros" class="btn btn-lg btn-secondary">Lista de libros disponibles!</a>
-				</p>
-			</div>
-			<div class="mastfoot">
-				<div class="inner">
-					<p style="color: white; font-style: bold;">Template para <a href="https://getbootstrap.com">Bootstrap</a>, creada por </a href="https://twitter.com/mdo">@mdo</a>.</p>
-			</div\>
-		</div>
-	</div>
-</body>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>VBooks - Pagina Principal</title>
+    <link href="{% static 'static/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'static/bootstrap/css/carousel.css' %}" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="/">VBooks</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Pagina Principal <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/libros/lista">Lista de Libros disponibles</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Iniciar Sesion</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/accounts/register/">Crear Cuenta</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main role="main">
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="first-slide" src="{% static 'imagenes/libros.jpg' %}" alt="First slide">
+            <div class="container">
+              <div class="carousel-caption text-left">
+                <h1>Acceso a Libros gratuitamente!</h1>
+                <p>Contamos con gran variedad de libros sin pagar nada!</p>
+                <p><a class="btn btn-lg btn-secondary" href="/accounts/register" role="button">Registrate ahora!</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img class="second-slide" src="{% static 'imagenes/biblioteca.jpg' %}" alt="Second slide">
+            <div class="container">
+              <div class="carousel-caption text-right">
+                <h1>Amplia variedad!</h1>
+                <p>Disponemos de una gran seleccion de libros para todos los gustos!</p>
+                <p><a class="btn btn-lg btn-secondary" href="/libros/lista" role="button">Lista de Libros disponibles!</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a class="carousel-control-prev"  role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Anterior</span>
+        </a>
+        <a class="carousel-control-next" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Siguiente</span>
+        </a>
+      </div>
+      <div class="container marketing">
+        <div class="row">
+          {% for i in result%}
+          <div class="col-lg-4">
+            <h2>{{i.Nombre}}</h2>
+            <p>{{i.Autor}}</p>
+            <p><a class="btn btn-secondary" href="/libros/detalle/{{i.id}}/" role="button">Detalles Completos</a></p>
+          </div>
+          {%endfor%}
+        </div>
+      </div>
+      <footer class="container">
+        <p class="float-right"><a href="#">Volver al Principio</a></p>
+        <p>Hecho por: Janeth Maldonado</p>
+      </footer>
+    </main>
+    <script src="{% static 'static/jquery/jquery-3.2.1.min.js'%}"></script>
+    <script>window.jQuery || document.write("<script src='{% static 'static/jquery/jquery-3.2.1.min.js' %}'><\/script>")</script>
+    <script src="https://getbootstrap.com/assets/js/vendor/popper.min.js"></script>
+    <script src="{% static 'static/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="https://getbootstrap.com/assets/js/vendor/holder.min.js"></script>
+    <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;">
+      <defs>
+        <style type="text/css"></style>
+      </defs>
+      <text x="0" y="25" style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">500x500</text>
+    </svg>
+  </body>
 </html>

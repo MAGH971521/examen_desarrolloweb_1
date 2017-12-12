@@ -1,54 +1,58 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Libros disponibles - Biblioteca</title>
-    <meta charset="utf-8">
-  	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  	<link type="text/css" rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-    <link type="text/css" rel="stylesheet" href="{% static 'mycss/Sub1.css' %}">
-  	<!--<script src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
-
-    <script src="{% static 'jquery/jquery-3.2.1.min.js'%}"></script>--->
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>VBooks</title>
+  <link href="{% static 'static/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'static/bootstrap/css/album.css' %}" rel="stylesheet">
   </head>
   <body>
-    <div  class="cover-container">
-      <div class="masthead clearfix">
-        <div class="inner" style="background-color: #333;">
-          <h3 class="masthead-brand">Biblioteca</h3>
-          <nav class="nav nav-masthead">
-            <a class="nav-link" href="/home/">Pagina Principal</a>
-            <a class="nav-link" href="/libros/lista">Lista de Libros</a>
-            <a class="nav-link" href="/accounts/register">Registrarse</a>
-            <a class="nav-link" href="/login">Iniciar sesion</a>
-          </nav>
+    <header>
+      <div class="navbar navbar-dark bg-dark">
+        <div class="container d-flex justify-content-between">
+          <a href="/" class="navbar-brand">VBooks - Pagina de Inicio</a>
         </div>
       </div>
-    </div>
-    <section class="jumbotron text-center" style="background-color: #333">
-      <div class="container">
-        <h1 class="jumbotron-heading">Libros</h1>
-        <p class="lead text-muted">Lista de Libros disponibles en la base de datos</p>
+    </header>
+    <main role="main">
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Lista de Libros disponibles</h1>
+          <p class="lead text-muted">Te gusta la lista, que esperas para unirte a esta pagina!</p>
+          <p>
+            <a href="/accounts/register" class="btn btn-primary">Registrate!</a>
+            <a href="/login" class="btn btn-secondary">Iniciar Sesion</a>
+          </p>
+        </div>
+      </section>
+      <div class="album text-muted">
+        <div class="container">
+          {%block content%}
+          {%endblock%}
+        </div>
       </div>
-    </section>
-
-    <div class="album text-muted">
+    </main>
+    <footer class="text-muted">
       <div class="container">
-        {%block content%}{%endblock%}
+        <p class="float-right">
+          <a href="#">Back to top</a>
+        </p>
       </div>
-    </div>
-
-  <footer class = "text-muted">
-   <div class="container">
-    <p>Ejemplo de album personalizado</p>
-   </div>
-  </footer>
-  <script
-  src="https://code.jquery.com/jquery-3.2.1.js"
-  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
-  crossorigin="anonymous"></script>
-  {%block script%}
-  {%endblock%}
-</body>
+    </footer>
+    <script src="{% static 'static/jquery/jquery-3.2.1.min.js'%}"></script>
+    <script>window.jQuery || document.write("<script src='{% static 'static/jquery/jquery-3.2.1.min.js' %}'><\/script>")</script>
+    <script src="https://getbootstrap.com/assets/js/vendor/popper.min.js"></script>
+    <script src="{% static 'static/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="https://getbootstrap.com/assets/js/vendor/holder.min.js"></script>
+    <script>
+      Holder.addTheme('thumb', {
+        bg: '#55595c',
+        fg: '#eceeef',
+        text: 'Thumbnail'
+      });
+    </script>
+  </body>
 </html>

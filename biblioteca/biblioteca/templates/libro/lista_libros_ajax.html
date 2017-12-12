@@ -1,4 +1,4 @@
-{% extends "base.html"%}
+{% extends "libro/base.html"%}
 {%block script%}
 <script>
 
@@ -14,7 +14,7 @@ function getParameterByName(name, url) {
 
 
 $(document).ready(function(){
-  // console.log("working");
+  console.log("working");
   var query = getParameterByName('q');
   console.log(query);
   //var nextTweetUrl;
@@ -28,35 +28,32 @@ $(document).ready(function(){
     var libroNombre = libroValue.Nombre;
     var libroEditorial = libroValue.Editorial;
     var libroPrecio = libroValue.Precio;
+    var libroSinopsis = libroValue.Sinopsis;
     var libroid = libroValue.id;
     if(prepend==true){
       $("#ajax_libros").prepend(
-        "<span class='card' style='width: 20rem; margin: 30px'>" +
-        "<img data-src='#' alt='" + libroNombre + "'>" +
-        "<div class='card-body'>"+
-        "<h4 class='card-title'>Autor:" + libroAutor +"</h4>"+
-        "<h6 class='card-subtitle mb-2 text-muted'>Editorial: " + libroEditorial +"</h6>"+
-        "<p class='card-text'>Precio: $" + libroPrecio +" MXN</p>"+
-        "<p><a class='nav-link1' href='/libros/detalle/" + libroid +"' style='color: black'>Detalles del libro</a></p>"+
-        "<p>&nbsp; |" + libroDateDisplay +"</p>"+
-        "</div>"+
-        "</span>")
+        "<div class='card' style='width: 20rem;'>"+
+            "<div class='card-body'>"+
+              "<h4 class='card-title'>Titulo: "+ libroNombre +"</h4>"+
+              "<h6 class='card-subtitle mb-2 text-muted'>Autor: "+ libroAutor +"</h6>"+
+              "<p class='card-text'>Editorial: "+ libroEditorial +"</p>"+
+              "<p class='card-text'>Editorial: "+ libroSinopsis.substring(0,150) +"</p>"+
+              "<a href='/libros/detalle/" + libroid +"'' class='card-link'>Detalle</a>"+
+            "</div>"+
+          "</div>")
     }
     else {
       $("#ajax_libros").append(
-        "<span class='card' style='width: 20rem;'>" +
-        "<img data-src='#' alt='" + libroNombre + "'>" +
-        "<div class='card-body'>"+
-        "<h4 class='card-title'>Autor:" + libroAutor +"</h4>"+
-        "<h6 class='card-subtitle mb-2 text-muted'>Editorial: " + libroEditorial +"</h6>"+
-        "<p class='card-text'>Precio: $" + libroPrecio +" MXN</p>"+
-        "<p>"+ libroDateDisplay +"</p>"+
-        "<p><a class='nav-link1' href='/libros/detalle/" + libroid +"' style='color: black'>Detalles del libro</a></p>"+
-        "<p><a class='nav-link1' href='/libros/detalle/" + libroid +"/delete' style='color: black'>Eliminar libro</a></p>"+
-        "<p><a class='nav-link1' href='/libros/detalle/" + libroid +"/edit' style='color: black'>Modificar libro</a></p>"+
-        "</div>"+
-        "</span>"
-      )
+        "<div class='card' style='width: 20rem;'>"+
+            "<div class='card-body'>"+
+              "<h4 class='card-title'>Titulo: "+ libroNombre +"</h4>"+
+              "<h6 class='card-subtitle mb-2 text-muted'>Autor: "+ libroAutor +"</h6>"+
+              "<p class='card-text'>Editorial: "+ libroEditorial +"</p>"+
+              "<p class='card-text'>Editorial: "+ libroSinopsis.substring(0,150) +"</p>"+
+              "<a href='/accounts/profile/libros/detalle/" + libroid +"' class='card-link'>Detalle</a>"+
+              "<a href='/accounts/profile/libros/detalle/" + libroid +"/delete' class='card-link'>Eliminar</a>"+
+              "<a href='/accounts/profile/libros/detalle/" + libroid +"/edit' class='card-link'>Modificar</a>"+
+          "</div>")
     }
   }
   function fecthLibros(url) {
@@ -98,7 +95,7 @@ $(document).ready(function(){
     if (nextLibroUrl) {
       fecthLibros(nextLibroUrl);
     }
-  })
+  });
   $("#libros-form").submit(function(event) {
       event.preventDefault();
       var _this = $(this);
@@ -121,7 +118,7 @@ $(document).ready(function(){
           console.log(data.status);
         }
       });
-  })
+  });
 });
 </script>
 {%endblock%}
@@ -133,6 +130,6 @@ $(document).ready(function(){
     <article class="row" id="ajax_libros">
 
     </article>
-    <button  class="btn btn-secondary" style="padding: 10px; margin: 10px;" id="loadmore">Cargar mas Libros</button>
+    <button  class="btn btn-primary" style="padding: 10px; margin: 10px;" id="loadmore">Cargar mas Libros</button>
 
 {%endblock%}

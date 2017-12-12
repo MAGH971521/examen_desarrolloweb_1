@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>VBooks Admon: {% block A %}{%endblock%}</title>
+    <link href="{%static 'static/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{%static 'static/bootstrap/css/starter-template.css'%}" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="/accounts/profile">VBooks</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/accounts/profile">Pagina Principal<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/accounts/profile">Lista Libros</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <main role="main" class="container">
+      {%block content%}
+      {%endblock%}
+    </main>
+    <script src="{% static 'static/jquery/jquery-3.2.1.min.js'%}"></script>
+    <script>window.jQuery || document.write("<script src='{% static 'static/jquery/jquery-3.2.1.min.js' %}'><\/script>")</script>
+    <script src="https://getbootstrap.com/assets/js/vendor/popper.min.js"></script>
+    <script src="{% static 'static/bootstrap/js/bootstrap.min.js' %}"></script>
+    {%block script%}{%endblock%}
+  </body>
+</html>
+
+</html>
