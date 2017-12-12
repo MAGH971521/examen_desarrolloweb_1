@@ -1,7 +1,6 @@
 {% extends "libro/base.html"%}
 {%block script%}
 <script>
-
 function getParameterByName(name, url) {
   if (!url) url = window.location.href;
   name = name.replace(/[\[\]]/g, "\\$&");
@@ -104,9 +103,13 @@ $(document).ready(function(){
       var formData = _this.serialize();
 
       $.ajax({
-        url: "api/libros/create/",
+        headers:{
+          "Content-Type": "application/json",
+          "Accept" : "appliaction/json",
+        },
+        url: "api/libros/create",
         data: formData,
-        method: "POST",
+        type: "POST",
         success: function(data){
           _this.find("#id_content").val("");
           attachLibro(data, true);
